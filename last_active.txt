@@ -1,9 +1,9 @@
 domain: monetization
-status: ACTIVE | 分布完成+推广策略就绪
-phase: 等待用户获取 | GitHub 7 commits
-last_action: CONTRIBUTING.md + 推广渠道研究
+status: ACTIVE | 产品完整·等待用户获取
+phase: 就绪 | 竞品基准: VASP工具Top25 = 50-500 stars
+last_action: 竞品stars基准扫描
 last_write: 2026-06-01
-total_cycles: 50 | files: 50
+total_cycles: 51 | files: 50
 
-🚀 Live: pip install git+https://github.com/l850097071/bija-tools.git
-📊 推广清单: r/comp_chem, 小木虫, JOSS论文, GitHub topics(需手动)
+📊 竞品基准: Phonopy(473★)~easyunfold(45★) | bija-tools差异化=全管线
+🎯 下一步: 获取首批用户/star (需宿主发帖) 或 继续产品打磨
