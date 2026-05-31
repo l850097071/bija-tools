@@ -1,11 +1,9 @@
 domain: monetization
-status: ACTIVE | PyPI就绪
-phase: 分布完成 | GitHub 6 commits + PyPI wheel就绪
-last_action: wheel构建成功(23.8KB), pip install验证通过
+status: ACTIVE | 分布完成+推广策略就绪
+phase: 等待用户获取 | GitHub 7 commits
+last_action: CONTRIBUTING.md + 推广渠道研究
 last_write: 2026-06-01
-total_cycles: 49 | files: 49
+total_cycles: 50 | files: 50
 
-🚀 分布状态:
-  GitHub: ✅ l850097071/bija-tools (6 commits) + bija-monetization (2 commits)
-  PyPI: ⏸️ wheel就绪, 需host提供PyPI token
-  pip install bija-tools: ✅ 本地验证通过
+🚀 Live: pip install git+https://github.com/l850097071/bija-tools.git
+📊 推广清单: r/comp_chem, 小木虫, JOSS论文, GitHub topics(需手动)
