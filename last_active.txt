@@ -1,10 +1,11 @@
 domain: monetization
-status: ACTIVE | 产品完成·等待分布
-phase: 就绪 | 代码/文档/教程/推广文案 全完成
-last_action: 三语推广文案(pitch)
+status: ACTIVE | PyPI就绪
+phase: 分布完成 | GitHub 6 commits + PyPI wheel就绪
+last_action: wheel构建成功(23.8KB), pip install验证通过
 last_write: 2026-06-01
-total_cycles: 47 | files: 49
+total_cycles: 49 | files: 49
 
-✅ 完成: 7命令+3自动化脚本+教程+配方库+推广文案
-⏸️ 阻塞: GitHub DNS不可达(宿主叫停)
-📊 结论: 产品侧已达MVP天花板。下一步=分布渠道突破。
+🚀 分布状态:
+  GitHub: ✅ l850097071/bija-tools (6 commits) + bija-monetization (2 commits)
+  PyPI: ⏸️ wheel就绪, 需host提供PyPI token
+  pip install bija-tools: ✅ 本地验证通过
