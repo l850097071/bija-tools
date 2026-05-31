@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VASP Recipe Book — 计算配方库</title>
+<style>
+:root{--bg:#0d1117;--card:#161b22;--border:#30363d;--green:#3fb950;--red:#f85149;--yellow:#d2991d;--text:#c9d1d9;--muted:#8b949e;--accent:#58a6ff;--purple:#a371f7}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.container{max-width:1000px;margin:0 auto;padding:40px 20px}
+header{text-align:center;margin-bottom:32px}
+header h1{font-size:28px;font-weight:600;margin-bottom:8px}
+header p{color:var(--muted)}
+.search-bar{position:relative;margin-bottom:24px}
+.search-bar input{width:100%;padding:14px 20px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font-size:15px;outline:none}
+.search-bar input:focus{border-color:var(--accent)}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px;justify-content:center}
+.tag-btn{padding:4px 14px;border:1px solid var(--border);border-radius:16px;background:transparent;color:var(--muted);cursor:pointer;font-size:12px;transition:.15s}
+.tag-btn:hover,.tag-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.recipe-list{display:grid;gap:16px}
+.recipe-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:.15s}
+.recipe-card:hover{border-color:var(--accent)}
+.recipe-summary{padding:20px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.recipe-summary h3{font-size:16px;margin-bottom:6px}
+.recipe-summary .desc{color:var(--muted);font-size:13px;line-height:1.5}
+.recipe-summary .tags-row{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}
+.recipe-summary .tag{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(88,166,255,0.1);color:var(--accent)}
+.recipe-summary .badge{font-size:11px;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.badge-b{background:rgba(63,185,80,0.15);color:var(--green)}
+.badge-i{background:rgba(210,153,29,0.15);color:var(--yellow)}
+.badge-a{background:rgba(248,81,73,0.15);color:var(--red)}
+.recipe-detail{display:none;padding:0 20px 20px;border-top:1px solid var(--border)}
+.recipe-detail.open{display:block}
+.detail-section{margin-top:16px}
+.detail-section h4{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.param-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px}
+.param-item{background:var(--bg);border-radius:6px;padding:8px 12px;font-size:13px;display:flex;justify-content:space-between}
+.param-key{color:var(--muted)}
+.param-val{color:var(--green);font-family:monospace}
+.pitfall-list{list-style:none}
+.pitfall-list li{font-size:13px;color:var(--yellow);padding:4px 0;padding-left:16px;position:relative}
+.pitfall-list li::before{content:'!';position:absolute;left:0;color:var(--red);font-weight:bold}
+footer{text-align:center;padding:40px;color:var(--muted);font-size:12px}
+.no-results{text-align:center;padding:60px 20px;color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <h1>VASP Recipe Book</h1>
+  <p>8个计算配方 · 输入即用 · 避坑清单</p>
+</header>
+<div class="search-bar"><input type="text" id="search" placeholder="搜索: CO2 / NEB / 频率 / 溶剂 / 能带 ..."></div>
+<div class="tags" id="tagFilters"></div>
+<div class="recipe-list" id="recipes"></div>
+<div class="no-results" id="noResults" style="display:none">没有匹配的配方。试试其他关键词?</div>
+</div>
+<footer>VASP Recipe Book — open source. Built by Bija Research Tools.</footer>
+
+<script>
+let recipes = [];
+let activeTag = null;
+
+fetch('recipes.json').then(r=>r.json()).then(data=>{
+  recipes = data.recipes;
+  renderTags();
+  renderRecipes(recipes);
+});
+
+function renderTags(){
+  const allTags = new Set();
+  recipes.forEach(r=>r.tags.forEach(t=>allTags.add(t)));
+  const el = document.getElementById('tagFilters');
+  el.innerHTML = [...allTags].sort().map(t=>
+    `<button class="tag-btn" data-tag="${t}">${t}</button>`
+  ).join('');
+}
+
+document.getElementById('tagFilters').onclick = e => {
+  if(!e.target.classList.contains('tag-btn')) return;
+  const tag = e.target.dataset.tag;
+  if(activeTag === tag){ activeTag = null; e.target.classList.remove('active'); }
+  else {
+    document.querySelectorAll('.tag-btn').forEach(b=>b.classList.remove('active'));
+    e.target.classList.add('active'); activeTag = tag;
+  }
+  filter();
+};
+
+document.getElementById('search').oninput = filter;
+
+function filter(){
+  const q = document.getElementById('search').value.toLowerCase();
+  let filtered = recipes;
+  if(activeTag) filtered = filtered.filter(r=>r.tags.includes(activeTag));
+  if(q) filtered = filtered.filter(r=>
+    r.title.toLowerCase().includes(q)||r.description.toLowerCase().includes(q)||r.tags.some(t=>t.toLowerCase().includes(q)));
+  renderRecipes(filtered);
+}
+
+function renderRecipes(list){
+  const el = document.getElementById('recipes');
+  document.getElementById('noResults').style.display = list.length ? 'none' : 'block';
+  el.innerHTML = list.map((r,i)=>{
+    const diffClass = {'beginner':'badge-b','intermediate':'badge-i','advanced':'badge-a'}[r.difficulty]||'';
+    const diffLabel = {'beginner':'入门','intermediate':'进阶','advanced':'高级'}[r.difficulty]||r.difficulty;
+    return `<div class="recipe-card" data-idx="${i}">
+      <div class="recipe-summary" onclick="this.parentElement.querySelector('.recipe-detail').classList.toggle('open')">
+        <div>
+          <h3>${r.title}</h3>
+          <div class="desc">${r.description}</div>
+          <div class="tags-row">${r.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+        </div>
+        <span class="badge ${diffClass}">${diffLabel}</span>
+      </div>
+      <div class="recipe-detail">
+        ${r.incar.relax ? `<div class="detail-section"><h4>INCAR — 结构优化</h4>
+          <div class="param-grid">${paramsToHTML(r.incar.relax)}</div></div>` : ''}
+        ${r.incar.static ? `<div class="detail-section"><h4>INCAR — 静态计算</h4>
+          <div class="param-grid">${paramsToHTML(r.incar.static)}</div></div>` : ''}
+        ${r.incar.neb ? `<div class="detail-section"><h4>INCAR — NEB</h4>
+          <div class="param-grid">${paramsToHTML(r.incar.neb)}</div></div>` : ''}
+        ${r.incar.phonon ? `<div class="detail-section"><h4>INCAR — 频率</h4>
+          <div class="param-grid">${paramsToHTML(r.incar.phonon)}</div></div>` : ''}
+        ${r.incar.vaspsol ? `<div class="detail-section"><h4>INCAR — VASPsol</h4>
+          <div class="param-grid">${paramsToHTML(r.incar.vaspsol)}</div></div>` : ''}
+        ${r.incar.scf ? `<div class="detail-section"><h4>INCAR — SCF</h4>
+          <div class="param-grid">${paramsToHTML(r.incar.scf)}</div></div>` : ''}
+        ${r.incar.bands ? `<div class="detail-section"><h4>INCAR — 能带</h4>
+          <div class="param-grid">${paramsToHTML(r.incar.bands)}</div></div>` : ''}
+        ${r.incar.bader ? `<div class="detail-section"><h4>INCAR — Bader</h4>
+          <div class="param-grid">${paramsToHTML(r.incar.bader)}</div></div>` : ''}
+        ${r.incar.bulk_relax ? `<div class="detail-section"><h4>INCAR — 体相优化</h4>
+          <div class="param-grid">${paramsToHTML(r.incar.bulk_relax)}</div></div>` : ''}
+        ${r.incar.dftu ? `<div class="detail-section"><h4>INCAR — DFT+U</h4>
+          <div class="param-grid">${paramsToHTML(r.incar.dftu)}</div></div>` : ''}
+        <div class="detail-section"><h4>KPOINTS</h4><p style="font-size:13px;color:var(--text)">${r.kpoints}</p></div>
+        <div class="detail-section"><h4>POTCAR</h4><p style="font-size:13px;color:var(--text)">${r.potcar_note}</p></div>
+        <div class="detail-section"><h4>常见坑</h4><ul class="pitfall-list">${r.pitfalls.map(p=>`<li>${p}</li>`).join('')}</ul></div>
+      </div>`;
+  }).join('');
+}
+
+function paramsToHTML(params){
+  return Object.entries(params).filter(([k,v])=>v!==null).map(([k,v])=>
+    `<div class="param-item"><span class="param-key">${k}</span><span class="param-val">${v}</span></div>`
+  ).join('');
+}
+</script>
+</body>
+</html>

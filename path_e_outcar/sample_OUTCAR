@@ -1,0 +1,30 @@
+ vasp.6.4.3 02Mar24 (build Mar 02 2024 12:00:00) complex
+
+ ENCUT  =   450.0 eV
+ number of k-points has changed ...   16
+ NBANDS =    80
+ number of ions     NIONS =     48
+ ion  type  symbol      48
+ POTCAR:    PAW_PBE Co 02Aug2007
+ POTCAR:    PAW_PBE O 02Aug2007
+ volume of cell :      850.50
+
+FREE ENERGIE OF THE ION-ELECTRON SYSTEM (eV)
+--------------------------------------------------
+free  energy   TOTEN  =      -450.123456 eV
+ energy  without entropy =       -450.123000  energy(sigma->0) =       -450.123000
+
+ reached required accuracy - stopping structural relaxation loop
+
+TOTAL-FORCE (eV/Angst)
+--------------------------------------------------
+     0.012345     0.001234    -0.003456    -0.012345
+     0.008901     0.005678     0.002345    -0.008901
+     0.023456    -0.004567    -0.006789    -0.023456
+     0.000123    -0.000234     0.000345    -0.000123
+   total drift:    0.001234    0.000567   -0.000890
+
+ FORCES: max atom, RMS   0.023456   0.015678
+
+Total CPU time used (sec):    12345.678
+Elapsed time (sec):           6789.012

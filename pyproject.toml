@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "bija-tools"
+version = "0.1.0"
+description = "Computational chemistry research toolkit: VASP input generator, HPC pre-submit validator, literature deep search"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+dependencies = ["flask>=2.0"]
+
+[project.scripts]
+bija-tools = "bija_tools.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/bija-cc/bija-tools"

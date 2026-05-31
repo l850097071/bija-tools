@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.claude/
+demo_output/
+test_*/
+test_pipeline/
+*.egg-info/

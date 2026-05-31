@@ -1,0 +1,224 @@
+{
+  "recipes": [
+    {
+      "id": "co2-adsorption-metal",
+      "title": "CO₂吸附在金属表面",
+      "tags": ["CO2", "adsorption", "metal", "surface", "catalysis"],
+      "difficulty": "intermediate",
+      "description": "CO₂在过渡金属(111)表面上的吸附能计算。关键：vdW修正必须开，偶极修正必须开。",
+      "incar": {
+        "relax": {
+          "SYSTEM": "CO2 on Metal(111)",
+          "ENCUT": 450,
+          "PREC": "Accurate",
+          "ALGO": "Normal",
+          "ISMEAR": 1, "SIGMA": 0.15,
+          "EDIFF": "1E-5", "NELM": 100,
+          "IBRION": 2, "ISIF": 2, "NSW": 200, "EDIFFG": -0.03,
+          "IVDW": 11, "IDIPOL": 3, "LDIPOL": true,
+          "ISPIN": 2, "LREAL": false, "ADDGRID": true
+        },
+        "static": {
+          "IBRION": -1, "NSW": 0, "ISMEAR": -5, "EDIFF": "1E-6"
+        }
+      },
+      "kpoints": "7 7 1 (Gamma-centered, 1 k-point along vacuum)",
+      "potcar_note": "Use PAW_PBE. ENCUT >= 1.3×ENMAX",
+      "pitfalls": [
+        "不加IVDW→吸附能误差0.3-0.5 eV",
+        "不加偶极修正→不对称slab产生虚假电场",
+        "ISMEAR=-5只能用于最终静态计算，不能用于结构优化",
+        "CO₂可能弯曲→检查是否需要ISPIN=2"
+      ],
+      "references": ["Matter Modeling SE", "VASP wiki forum"]
+    },
+    {
+      "id": "transition-state-neb",
+      "title": "过渡态搜索 (NEB)",
+      "tags": ["NEB", "transition state", "barrier", "kinetics"],
+      "difficulty": "advanced",
+      "description": "用Climbing Image NEB搜索反应过渡态。初末态结构必须先各自优化到力<0.03 eV/Å。",
+      "incar": {
+        "neb": {
+          "SYSTEM": "NEB",
+          "ENCUT": 450, "PREC": "Normal",
+          "ISMEAR": 1, "SIGMA": 0.1,
+          "EDIFF": "1E-5",
+          "IBRION": 3, "POTIM": 0, "NSW": 200,
+          "EDIFFG": -0.05, "SPRING": -5,
+          "LCLIMB": true, "IMAGES": 5,
+          "LREAL": "Auto", "IVDW": 11
+        }
+      },
+      "kpoints": "同基底计算 (保持与初末态一致)",
+      "potcar_note": "初态+末态+所有image必须用完全相同的POTCAR",
+      "pitfalls": [
+        "初末态必须各自优化到力收敛→否则NEB路径无意义",
+        "IMAGES太少→过渡态被跳过。建议5-7个image",
+        "SPRING=-5是默认值，不要随意改",
+        "NEB不保证找到的是全局最低能垒→跑完检查虚频"
+      ],
+      "references": ["VASP NEB tutorial"]
+    },
+    {
+      "id": "phonon-frequency",
+      "title": "声子频率计算",
+      "tags": ["phonon", "frequency", "vibrational", "ZPE", "free energy"],
+      "difficulty": "intermediate",
+      "description": "计算吸附质的振动频率→零点能(ZPE)+熵修正(TS)。自由能=电子能+ZPE-TS。",
+      "incar": {
+        "phonon": {
+          "SYSTEM": "Frequency",
+          "ENCUT": 500,
+          "PREC": "Accurate", "ADDGRID": true,
+          "ISMEAR": 0, "SIGMA": 0.05,
+          "EDIFF": "1E-8",
+          "IBRION": 5, "NSW": 1,
+          "POTIM": 0.015, "NFREE": 2,
+          "LREAL": false
+        }
+      },
+      "kpoints": "与优化计算一致",
+      "potcar_note": "ENCUT要比优化计算高(500+ eV)，能量对截断能更敏感",
+      "pitfalls": [
+        "EDIFF必须1E-8→振动频率对能量精度极度敏感",
+        "只算吸附质原子(冻结基底)→否则计算量爆炸",
+        "虚频→结构不是真极小点→回去重新优化",
+        "POTIM=0.015是默认位移量，不要随意改"
+      ],
+      "references": ["VASP IBRION=5 documentation"]
+    },
+    {
+      "id": "solvation-vaspsol",
+      "title": "隐式溶剂化 (VASPsol)",
+      "tags": ["solvent", "VASPsol", "electrolyte", "electrochemistry"],
+      "difficulty": "advanced",
+      "description": "用电解质隐式模型模拟溶剂效应。适合电催化(CO2RR/HER/OER)体系。",
+      "incar": {
+        "vaspsol": {
+          "SYSTEM": "Solvent",
+          "ENCUT": 600,
+          "PREC": "Accurate", "ADDGRID": true,
+          "ISMEAR": 1, "SIGMA": 0.15,
+          "EDIFF": "1E-5",
+          "IBRION": 2, "ISIF": 2, "EDIFFG": -0.03,
+          "LSOL": true,
+          "EB_k": 80, "TAU": 0,
+          "LAMBDA_D_K": 3.0, "SIGMA_K": 0.6, "NC_K": 0.0025
+        }
+      },
+      "kpoints": "同气相计算",
+      "potcar_note": "ENCUT需≥600 eV (溶剂空穴能收敛慢)",
+      "pitfalls": [
+        "溶剂化能收敛需要ENCUT≥600 eV→比普通计算高",
+        "不同溶剂介电常数不同→修改EB_k (水=80)",
+        "VASPsol需单独编译→确认VASP版本支持",
+        "溶剂化模型对绝对能量不准→只看相对趋势"
+      ],
+      "references": ["VASPsol GitHub", "Hennig group"]
+    },
+    {
+      "id": "band-structure-dos",
+      "title": "能带结构 + 态密度 (DOS)",
+      "tags": ["band structure", "DOS", "electronic", "analysis"],
+      "difficulty": "beginner",
+      "description": "先优化→静态算CHGCAR→非自洽算能带(DOS可用静态CHGCAR)。",
+      "incar": {
+        "scf": {
+          "SYSTEM": "Band_SCF",
+          "ENCUT": 450, "ISMEAR": 0, "SIGMA": 0.05,
+          "EDIFF": "1E-6", "LCHARG": true, "LWAVE": true
+        },
+        "bands": {
+          "ICHARG": 11, "ISMEAR": 0, "SIGMA": 0.05,
+          "LORBIT": 11, "NEDOS": 2000
+        }
+      },
+      "kpoints": "能带: 高对称k点路径 (Line-mode) | DOS: 与SCF相同或更密",
+      "potcar_note": "标准POTCAR即可",
+      "pitfalls": [
+        "能带计算必须用Line-mode KPOINTS→不是常规网格",
+        "LORBIT=11输出原子投影DOS→文件会很大",
+        "NEDOS太小→DOS锯齿状。2000+为宜",
+        "先做静态自洽计算(ICHARG=2)→再非自洽算能带(ICHARG=11)"
+      ],
+      "references": ["VASP wiki band structure"]
+    },
+    {
+      "id": "bader-charge",
+      "title": "Bader电荷分析",
+      "tags": ["Bader", "charge", "analysis", "electron transfer"],
+      "difficulty": "beginner",
+      "description": "分析原子间的电荷转移。适合催化体系判断氧化还原。",
+      "incar": {
+        "bader": {
+          "LAECHG": true, "LCHARG": true,
+          "PREC": "Accurate", "ADDGRID": true,
+          "NGXF": null, "NGYF": null, "NGZF": null
+        }
+      },
+      "kpoints": "与优化计算相同",
+      "potcar_note": "标准POTCAR。注意：POTCAR中的电子数必须与Bader分析一致",
+      "pitfalls": [
+        "必须用FINE FFT网格(ADDGRID=TRUE或以2倍NGX/Y/Z)",
+        "Bader分析结果依赖电荷密度质量→PREC=Accurate",
+        "LAECHG=TRUE输出AECCAR0/1/2三个文件→体积大",
+        "绝对电荷没有物理意义→只看相对趋势(同一体系内比较)"
+      ],
+      "references": ["Henkelman group Bader tutorial"]
+    },
+    {
+      "id": "optimization-bulk",
+      "title": "体相结构优化",
+      "tags": ["bulk", "optimization", "lattice", "cell"],
+      "difficulty": "beginner",
+      "description": "优化晶格常数+原子位置。先用状态方程拟合再精细优化。",
+      "incar": {
+        "bulk_relax": {
+          "SYSTEM": "Bulk",
+          "ENCUT": 520,
+          "PREC": "Accurate",
+          "ISMEAR": 1, "SIGMA": 0.15,
+          "EDIFF": "1E-6",
+          "IBRION": 2, "ISIF": 3, "NSW": 100,
+          "EDIFFG": -0.01, "POTIM": 0.2,
+          "IVDW": 11
+        }
+      },
+      "kpoints": "KSPACING=0.25或更密 (体相需要密的k点)",
+      "potcar_note": "ENCUT≥1.3×ENMAX，建议520 eV以上",
+      "pitfalls": [
+        "ISIF=3同时优化晶格+离子→计算量大→可能不收敛",
+        "分两步做更稳: 1) ISIF=3粗优化 2) ISIF=2精优化",
+        "金属ENCUT要比半导体高( Pulay stress )",
+        "优化后的晶格与实验值比较→差>2%需检查"
+      ],
+      "references": ["VASP bulk optimization best practices"]
+    },
+    {
+      "id": "dft-plus-u",
+      "title": "DFT+U 强关联修正",
+      "tags": ["DFT+U", "correlation", "transition metal", "oxide"],
+      "difficulty": "intermediate",
+      "description": "过渡金属氧化物(d/f电子)→DFT+U修正自相互作用误差。U值取决于元素和氧化态。",
+      "incar": {
+        "dftu": {
+          "LDAU": true, "LDAUTYPE": 2,
+          "LDAUL": "-1 -1 2",
+          "LDAUU": "0 0 3.5",
+          "LDAUJ": "0 0 0",
+          "LASPH": true
+        }
+      },
+      "kpoints": "同标准DFT计算",
+      "potcar_note": "需要PAW_PBE或PAW_GGA。某些元素需要_pv赝势。",
+      "pitfalls": [
+        "U值不是普适的→文献值仅供参考(CoO:3.0-4.5, FeO:4.0-5.3)",
+        "LASPH=TRUE加速d轨道收敛→DFT+U必须开",
+        "U过大会得到非物理的绝缘体态→检查态密度",
+        "不同U值可能得到不同的基态→测试U=0到6的变化趋势"
+      ],
+      "references": ["VASP DFT+U wiki", "Matter Modeling SE CoO U value"]
+    }
+  ]
+}
