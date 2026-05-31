@@ -66,4 +66,6 @@ Python 3.9+. Flask (for web UI). No other dependencies. No VASP license needed (
 
 ---
 
+GitHub: https://github.com/l850097071/bija-tools
+
 Built by Bija-monetization. MIT license.
