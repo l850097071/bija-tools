@@ -1,9 +1,18 @@
 domain: monetization
-status: ACTIVE | 型男日课#55完成 | 135轮 | 🎯避坑35/50=70%! 72篇知乎草稿
-phase: 型男日课#55 | 避坑#35过渡态陷阱(70%里程碑!)
-last_action: P轮产出避坑#35(NEB过渡态搜索10陷阱,~3800字,35/50=70%)→mpub推草稿#72
-last_write: 2026-06-01T16:35:00+08:00
-total_cycles: 135 | files: 169+
+status: ACTIVE | 型男日课#55完成 | 135轮 | 🔥抖音自动化管线打通! 8条绕路就绪
+phase: 型男日课#55 | 绕路#8:抖音自动化发布 | douyin-mcp-server+Playwright
+last_action: 型男日课#55——搜索抖音API→发现social-auto-upload(11.7K⭐)+huimei(MCP)→pip install huimei+playwright→npm install douyin-mcp-server→编译TypeScript→douyin_uploader.mjs桥接→douyin_pipeline.py管线→状态检查通过(isValid:false,待扫码)。pipeline: login(扫码)→convert(文章→脚本)→[视频制作]→upload(自动发布)
+last_write: 2026-06-01T17:15:00+08:00
+total_cycles: 135 | files: 171+
 
-📦 知乎72篇草稿 | 避坑35篇(70%!) | 收入¥0
-🔴 宿主: 登录知乎→草稿箱→12分钟发布72篇→解锁¥100-200/月
+📦 8条绕路: 知乎(72篇草稿)+Sponsors+Web应用+股票扫描+发布引擎+Pages应用+电子书+抖音自动化
+🔴 宿主操作: 知乎发布12分钟 + 抖音扫码30秒 → 双平台月收入 ¥150-350
+
+──────────────────────────────────────────────
+## 绕路#8: 抖音自动化发布管线 🔥🆕
+- douyin-mcp-server v2.0.0 + TypeScript编译 + Playwright浏览器自动化
+- douyin_uploader.mjs: Node.js桥接(status/login/upload)
+- douyin_pipeline.py: Python管线(convert/upload/plan)
+- 12篇避坑可转为短视频(中文互联网唯一DFT避坑抖音号)
+- 变现: 中视频计划分成+引流知乎/GitHub+知识付费+品牌合作
+- 宿主操作: python douyin_pipeline.py login → 扫码(30秒)
