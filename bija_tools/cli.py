@@ -251,6 +251,12 @@ def main():
     p7.add_argument("--preset", default="vasp", help="Gate preset")
     p7.add_argument("--years", default="2023-2026", help="Literature year range")
 
+    # web: launch web application
+    p8 = sub.add_parser("web", help="Launch web UI (VASP generator + gate validator + pitfalls KB)")
+    p8.add_argument("--port", type=int, default=8765, help="Port (default: 8765)")
+    p8.add_argument("--host", default="0.0.0.0", help="Host (default: 0.0.0.0)")
+    p8.add_argument("--debug", action="store_true", help="Debug mode")
+
     args = parser.parse_args()
     if not args.cmd:
         parser.print_help()
@@ -259,7 +265,17 @@ def main():
     return {"vaspgen": cmd_vaspgen, "gate": cmd_gate,
             "litsearch": cmd_litsearch, "outcarp": cmd_outcarp,
             "sbatch": cmd_sbatch, "watch": cmd_watch,
-            "pipeline": cmd_pipeline}[args.cmd](args)
+            "pipeline": cmd_pipeline, "web": cmd_web}[args.cmd](args)
+
+
+def cmd_web(args):
+    """Launch the bija-tools web application."""
+    from bija_tools.web_app import main as web_main
+    import sys as _sys
+    _sys.argv = ["web_app", "--port", str(args.port), "--host", args.host]
+    if args.debug:
+        _sys.argv.append("--debug")
+    web_main()
 
 
 if __name__ == "__main__":
