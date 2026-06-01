@@ -1,0 +1,100 @@
+[
+  {
+    "code": "300750",
+    "name": "宁德时代",
+    "last_price": 113.17217620303447,
+    "strategy": "ma_cross",
+    "signals": [
+      {
+        "type": "HOLD",
+        "reason": "无明显信号",
+        "strength": "neutral"
+      }
+    ],
+    "scanned_at": "2026-06-01T12:47:08.136454"
+  },
+  {
+    "code": "002074",
+    "name": "国轩高科",
+    "last_price": 113.17217620303447,
+    "strategy": "ma_cross",
+    "signals": [
+      {
+        "type": "HOLD",
+        "reason": "无明显信号",
+        "strength": "neutral"
+      }
+    ],
+    "scanned_at": "2026-06-01T12:47:08.136532"
+  },
+  {
+    "code": "300014",
+    "name": "亿纬锂能",
+    "last_price": 113.17217620303447,
+    "strategy": "ma_cross",
+    "signals": [
+      {
+        "type": "HOLD",
+        "reason": "无明显信号",
+        "strength": "neutral"
+      }
+    ],
+    "scanned_at": "2026-06-01T12:47:08.136594"
+  },
+  {
+    "code": "002460",
+    "name": "赣锋锂业",
+    "last_price": 113.17217620303447,
+    "strategy": "ma_cross",
+    "signals": [
+      {
+        "type": "HOLD",
+        "reason": "无明显信号",
+        "strength": "neutral"
+      }
+    ],
+    "scanned_at": "2026-06-01T12:47:08.136651"
+  },
+  {
+    "code": "603799",
+    "name": "华友钴业",
+    "last_price": 113.17217620303447,
+    "strategy": "ma_cross",
+    "signals": [
+      {
+        "type": "HOLD",
+        "reason": "无明显信号",
+        "strength": "neutral"
+      }
+    ],
+    "scanned_at": "2026-06-01T12:47:08.136706"
+  },
+  {
+    "code": "300073",
+    "name": "当升科技",
+    "last_price": 113.17217620303447,
+    "strategy": "ma_cross",
+    "signals": [
+      {
+        "type": "HOLD",
+        "reason": "无明显信号",
+        "strength": "neutral"
+      }
+    ],
+    "scanned_at": "2026-06-01T12:47:08.136760"
+  },
+  {
+    "code": "688005",
+    "name": "容百科技",
+    "last_price": 113.17217620303447,
+    "strategy": "ma_cross",
+    "signals": [
+      {
+        "type": "HOLD",
+        "reason": "无明显信号",
+        "strength": "neutral"
+      }
+    ],
+    "scanned_at": "2026-06-01T12:47:08.136813"
+  }
+]

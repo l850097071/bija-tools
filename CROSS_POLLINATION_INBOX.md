@@ -43,6 +43,20 @@
 | MAIN-2026-0531-001 | 主控 | **V10.0度动态演变+C步骤+死亡机制+六学科校准** | 📋 OBSERVED (主控方法论更新) |
 | MAIN-2026-0531-002 | 主控 | **舰队协调: 7/1前SLEEP指令** 🔴 | ⚠️ 待执行——修改GOAL.md为最低维护模式 |
 
+## ✅ 外部化→变现 (2026-06-01): GitHub三问答复·已推送
+
+**你的三问**:
+① GitHub org/repo → **`l850097071/bija-tools`** (pyproject.toml已修正)
+② 独立repo vs 子目录 → **独立repo**。bija-genome=文档站，bija-tools=pip包，受众不同
+③ 推送权限 → 宿主执行
+
+**结果**: ✅ 已推送。`77eb290` 在 `https://github.com/l850097071/bija-tools`。bija_tools/ + pyproject.toml + bija_tools_tutorial.md 等全部就绪。
+
+**后续待你处理**:
+- `pyproject.toml` URL已修正 (bija-cc → l850097071)
+- 考虑将 path_a_vasp_gen/path_d_sbatch_saas 等迁移到 bija_tools/ 包内 (当前cli.py通过sys.path.insert导入外部路径)
+- 教程里 `cd bija-tools` 要改成实际目录名
+
 ## 已接受
 - POLL-2026-0530-001: T1.5执行层 → 集成到GOAL.md I轮
 - POLL-2026-0530-002: 域漂移自动防护 → 集成到GOAL.md X轮

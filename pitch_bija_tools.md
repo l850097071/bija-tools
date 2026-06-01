@@ -43,7 +43,7 @@ bija-tools --help
 
 **限制：** POTCAR需要自己从VASP授权目录构建（版权原因），其他文件全自动生成。目前支持VASP/PWmat/Gaussian三个软件，59种元素。
 
-GitHub: （等网络通了补链接）
+GitHub: https://github.com/l850097071/bija-tools
 有问题直接在帖子里问，看到会回。
 
 ---

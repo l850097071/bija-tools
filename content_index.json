@@ -1,0 +1,721 @@
+[
+  {
+    "file": "知乎10_AI替代程序员_2026真相.md",
+    "title": "",
+    "word_count": 922,
+    "domains": [
+      "AI应用"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎10_AI替代程序员_2026真相.md"
+  },
+  {
+    "file": "知乎11_AI时代最保值的技能.md",
+    "title": "",
+    "word_count": 1146,
+    "domains": [
+      "其他"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎11_AI时代最保值的技能.md"
+  },
+  {
+    "file": "知乎12_一人内容工厂_自动流水线.md",
+    "title": "",
+    "word_count": 1077,
+    "domains": [
+      "AI应用"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎12_一人内容工厂_自动流水线.md"
+  },
+  {
+    "file": "知乎13_AI编程工具对比2026.md",
+    "title": "",
+    "word_count": 880,
+    "domains": [
+      "AI应用",
+      "开源"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎13_AI编程工具对比2026.md"
+  },
+  {
+    "file": "知乎14_数码产品推荐2026.md",
+    "title": "",
+    "word_count": 830,
+    "domains": [
+      "其他"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎14_数码产品推荐2026.md"
+  },
+  {
+    "file": "知乎15_AI时代副业真相.md",
+    "title": "",
+    "word_count": 1011,
+    "domains": [
+      "变现"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎15_AI时代副业真相.md"
+  },
+  {
+    "file": "知乎16_2026年AI五大趋势.md",
+    "title": "",
+    "word_count": 1047,
+    "domains": [
+      "AI应用"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎16_2026年AI五大趋势.md"
+  },
+  {
+    "file": "知乎17_AI工作流搭建方案.md",
+    "title": "",
+    "word_count": 843,
+    "domains": [
+      "AI应用",
+      "内容创作"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎17_AI工作流搭建方案.md"
+  },
+  {
+    "file": "知乎18_如何用AI加速学习.md",
+    "title": "",
+    "word_count": 1041,
+    "domains": [
+      "AI应用"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎18_如何用AI加速学习.md"
+  },
+  {
+    "file": "知乎19_AI使用误区_top5.md",
+    "title": "",
+    "word_count": 877,
+    "domains": [
+      "AI应用"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎19_AI使用误区_top5.md"
+  },
+  {
+    "file": "知乎1_多平台版.md",
+    "title": "知乎 #1 多平台适配",
+    "word_count": 369,
+    "domains": [
+      "其他"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎1_多平台版.md"
+  },
+  {
+    "file": "知乎1_我的NC发表之路_初稿.md",
+    "title": "",
+    "word_count": 1191,
+    "domains": [
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎1_我的NC发表之路_初稿.md"
+  },
+  {
+    "file": "知乎20_Claude_vs_GPT实测.md",
+    "title": "",
+    "word_count": 635,
+    "domains": [
+      "其他"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎20_Claude_vs_GPT实测.md"
+  },
+  {
+    "file": "知乎21_自学编程2026指南.md",
+    "title": "",
+    "word_count": 735,
+    "domains": [
+      "AI应用"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎21_自学编程2026指南.md"
+  },
+  {
+    "file": "知乎22_ClaudeCode高效使用技巧.md",
+    "title": "",
+    "word_count": 770,
+    "domains": [
+      "AI技术",
+      "AI应用",
+      "开源"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎22_ClaudeCode高效使用技巧.md"
+  },
+  {
+    "file": "知乎23_2026年值得关注的AI公司.md",
+    "title": "",
+    "word_count": 818,
+    "domains": [
+      "AI产业",
+      "AI技术",
+      "AI应用"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎23_2026年值得关注的AI公司.md"
+  },
+  {
+    "file": "知乎24_如何判断AI资讯可信度.md",
+    "title": "",
+    "word_count": 509,
+    "domains": [
+      "AI技术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎24_如何判断AI资讯可信度.md"
+  },
+  {
+    "file": "知乎25_Prompt工程进阶.md",
+    "title": "",
+    "word_count": 751,
+    "domains": [
+      "其他"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎25_Prompt工程进阶.md"
+  },
+  {
+    "file": "知乎26_AI焦虑应对指南.md",
+    "title": "",
+    "word_count": 760,
+    "domains": [
+      "其他"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎26_AI焦虑应对指南.md"
+  },
+  {
+    "file": "知乎27_远程工作AI工具链.md",
+    "title": "",
+    "word_count": 615,
+    "domains": [
+      "AI应用"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎27_远程工作AI工具链.md"
+  },
+  {
+    "file": "知乎28_Notion_AI知识库方案.md",
+    "title": "",
+    "word_count": 518,
+    "domains": [
+      "AI应用"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎28_Notion_AI知识库方案.md"
+  },
+  {
+    "file": "知乎29_开源项目推广2026指南.md",
+    "title": "知乎29：2026年，一个开源项目怎么让别人知道？——开发者推广完全指南",
+    "word_count": 2234,
+    "domains": [
+      "AI应用",
+      "开源"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎29_开源项目推广2026指南.md"
+  },
+  {
+    "file": "知乎2_VASP新手10个坑.md",
+    "title": "",
+    "word_count": 1555,
+    "domains": [
+      "其他"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎2_VASP新手10个坑.md"
+  },
+  {
+    "file": "知乎30_AI_Agent产业落地2026全景.md",
+    "title": "知乎30：2026年，AI Agent已经杀进工厂和银行了——40%企业正在用，你还觉得它是概念？",
+    "word_count": 1874,
+    "domains": [
+      "AI产业",
+      "AI技术",
+      "能源",
+      "制造"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎30_AI_Agent产业落地2026全景.md"
+  },
+  {
+    "file": "知乎30_Gemini_for_Science_2026深度解析.md",
+    "title": "知乎30: Google Gemini for Science 深度解析——2026年AI科学家走到哪了？",
+    "word_count": 1444,
+    "domains": [
+      "AI应用",
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎30_Gemini_for_Science_2026深度解析.md"
+  },
+  {
+    "file": "知乎31_学术界AI审稿2026边界在哪里.md",
+    "title": "知乎31：2026年，审稿人也在用AI审你的论文——学术界的AI边界到底在哪？",
+    "word_count": 2279,
+    "domains": [
+      "学术",
+      "安全"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎31_学术界AI审稿2026边界在哪里.md"
+  },
+  {
+    "file": "知乎32_DFT论文5个审稿人必问_提前堵死checklist.md",
+    "title": "知乎32: DFT论文5个审稿人必问问题——提前堵死的完整Checklist",
+    "word_count": 2251,
+    "domains": [
+      "AI应用",
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎32_DFT论文5个审稿人必问_提前堵死checklist.md"
+  },
+  {
+    "file": "知乎32_知识付费2026真相_卖课已死.md",
+    "title": "知乎32：2026年，知识付费死了吗？——\"卖课的\"已经在转行了，\"卖智能体的\"刚入场",
+    "word_count": 1900,
+    "domains": [
+      "AI产业",
+      "AI应用",
+      "变现",
+      "法律",
+      "内容创作"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎32_知识付费2026真相_卖课已死.md"
+  },
+  {
+    "file": "知乎33_DFT计算化学从入门到NC_3年工具链全公开.md",
+    "title": "",
+    "word_count": 1648,
+    "domains": [
+      "AI应用",
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎33_DFT计算化学从入门到NC_3年工具链全公开.md"
+  },
+  {
+    "file": "知乎33_知乎盐粒变现实操2026.md",
+    "title": "知乎33：写了60万字才摸到的盐粒密码——2026年知乎变现实操手册",
+    "word_count": 1756,
+    "domains": [
+      "变现",
+      "内容创作"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎33_知乎盐粒变现实操2026.md"
+  },
+  {
+    "file": "知乎34_一人公司AI超级个体2026.md",
+    "title": "知乎34：1个人+AI=一家公司？2026年1600万\"一人公司\"的真实图景",
+    "word_count": 1834,
+    "domains": [
+      "AI产业",
+      "AI政策",
+      "AI应用",
+      "变现",
+      "创业",
+      "法律"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎34_一人公司AI超级个体2026.md"
+  },
+  {
+    "file": "知乎34_吸附能计算10个常见错误.md",
+    "title": "知乎34: 吸附能计算的10个常见错误——一个催化DFT博士的5年踩坑实录",
+    "word_count": 1888,
+    "domains": [
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎34_吸附能计算10个常见错误.md"
+  },
+  {
+    "file": "知乎35_AI_Agent协议之战_MCP_A2A_2026.md",
+    "title": "知乎35：AI Agent的\"TCP/IP时刻\"来了——2026年MCP vs A2A协议之战全解析",
+    "word_count": 1977,
+    "domains": [
+      "AI产业",
+      "AI技术",
+      "学术",
+      "开源",
+      "安全"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎35_AI_Agent协议之战_MCP_A2A_2026.md"
+  },
+  {
+    "file": "知乎35_VASP参数调优实战手册.md",
+    "title": "知乎35: VASP参数调优实战手册——从\"能跑\"到\"能信\"",
+    "word_count": 2275,
+    "domains": [
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎35_VASP参数调优实战手册.md"
+  },
+  {
+    "file": "知乎36_NEB过渡态5个致命陷阱.md",
+    "title": "知乎36: NEB过渡态计算的5个致命陷阱——90%的人第一条就错了",
+    "word_count": 2159,
+    "domains": [
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎36_NEB过渡态5个致命陷阱.md"
+  },
+  {
+    "file": "知乎36_全球AI监管2026全景.md",
+    "title": "知乎36：2026全球AI监管大年——美国\"放养\"、欧盟\"收紧\"、中国\"定规\"，你的AI产品该往哪走？",
+    "word_count": 2120,
+    "domains": [
+      "AI产业",
+      "AI技术",
+      "AI政策",
+      "AI应用",
+      "安全",
+      "法律"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎36_全球AI监管2026全景.md"
+  },
+  {
+    "file": "知乎37_国产AI芯片2026三国杀.md",
+    "title": "知乎37：国产AI芯片\"三国杀\"——华为/阿里/百度，谁的芯片在真正跑大模型？",
+    "word_count": 1798,
+    "domains": [
+      "AI产业",
+      "AI技术",
+      "AI政策",
+      "AI应用",
+      "硬件"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎37_国产AI芯片2026三国杀.md"
+  },
+  {
+    "file": "知乎37_审稿人回复模板_过渡态计算5个必问角度.md",
+    "title": "知乎37: 审稿人回复模板——过渡态计算5个必问角度（避坑系列#4）",
+    "word_count": 2359,
+    "domains": [
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎37_审稿人回复模板_过渡态计算5个必问角度.md"
+  },
+  {
+    "file": "知乎38_AI网络安全2026攻防之战.md",
+    "title": "知乎38：一个人+AI，一周写了88,000行恶意代码——2026年AI网络安全攻防真相",
+    "word_count": 1772,
+    "domains": [
+      "AI技术",
+      "AI应用",
+      "安全"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎38_AI网络安全2026攻防之战.md"
+  },
+  {
+    "file": "知乎38_DFT+机器学习避坑指南.md",
+    "title": "知乎38: DFT+机器学习避坑指南——从\"跑通了\"到\"跑对了\"（避坑系列#5）",
+    "word_count": 2421,
+    "domains": [
+      "AI技术",
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎38_DFT+机器学习避坑指南.md"
+  },
+  {
+    "file": "知乎39_AI医疗2026_从诊断到制药.md",
+    "title": "知乎39：AI在2026年已经能看病了——从诊断罕见病到预测阿尔茨海默，九个真实突破",
+    "word_count": 1973,
+    "domains": [
+      "学术",
+      "医疗",
+      "硬件",
+      "法律"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎39_AI医疗2026_从诊断到制药.md"
+  },
+  {
+    "file": "知乎39_计算化学PhD的AI工具链2026全公开.md",
+    "title": "知乎39: 计算化学PhD的AI工具链2026全公开（避坑系列#6）",
+    "word_count": 2626,
+    "domains": [
+      "AI应用",
+      "学术",
+      "开源"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎39_计算化学PhD的AI工具链2026全公开.md"
+  },
+  {
+    "file": "知乎3_计算化学新兴方向2026.md",
+    "title": "",
+    "word_count": 1443,
+    "domains": [
+      "AI应用",
+      "学术",
+      "开源"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎3_计算化学新兴方向2026.md"
+  },
+  {
+    "file": "知乎40_AI环境代价2026真相.md",
+    "title": "知乎40：AI正在\"烧\"掉多少电？——2026年AI环境代价的真相",
+    "word_count": 1609,
+    "domains": [
+      "AI产业",
+      "AI政策",
+      "AI应用",
+      "学术",
+      "能源"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎40_AI环境代价2026真相.md"
+  },
+  {
+    "file": "知乎40_科学博主知乎运营与变现全攻略_避坑系列7.md",
+    "title": "知乎40: 科学博主知乎运营与变现全攻略——从0到第一篇收入的避坑指南（避坑系列#7）",
+    "word_count": 2020,
+    "domains": [
+      "学术",
+      "变现",
+      "内容创作"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎40_科学博主知乎运营与变现全攻略_避坑系列7.md"
+  },
+  {
+    "file": "知乎41_AI法律科技2026_律师会被替代吗.md",
+    "title": "知乎41：AI正在杀进律所——2026年，律师会被替代吗？",
+    "word_count": 1757,
+    "domains": [
+      "AI产业",
+      "AI政策",
+      "AI应用",
+      "法律"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎41_AI法律科技2026_律师会被替代吗.md"
+  },
+  {
+    "file": "知乎41_DFT翻车实录_SCF表面自旋7大翻车错误_避坑系列8.md",
+    "title": "知乎41: DFT计算翻车实录——SCF收敛失败、表面建错模型、自旋设置踩坑，7个让审稿人一眼看穿的错误（避坑系列#8）",
+    "word_count": 1961,
+    "domains": [
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎41_DFT翻车实录_SCF表面自旋7大翻车错误_避坑系列8.md"
+  },
+  {
+    "file": "知乎42_AI制造业2026_数字孪生到自主工厂.md",
+    "title": "知乎42：AI正在接管工厂——2026年从\"自动化\"到\"自主化\"的制造革命",
+    "word_count": 1893,
+    "domains": [
+      "AI产业",
+      "AI技术",
+      "硬件",
+      "能源",
+      "制造"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎42_AI制造业2026_数字孪生到自主工厂.md"
+  },
+  {
+    "file": "知乎42_Bader电荷电子结构分析避坑指南.md",
+    "title": "知乎42: Bader电荷与电子结构分析——5个让你审稿翻车的隐蔽错误（避坑系列#9）",
+    "word_count": 2060,
+    "domains": [
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎42_Bader电荷电子结构分析避坑指南.md"
+  },
+  {
+    "file": "知乎43_人形机器人2026三巨头之战.md",
+    "title": "知乎43：2万美元买个机器人管家？——2026年人形机器人\"三国杀\"",
+    "word_count": 1792,
+    "domains": [
+      "AI技术",
+      "硬件",
+      "制造"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎43_人形机器人2026三巨头之战.md"
+  },
+  {
+    "file": "知乎44_Sora关停_中国AI视频登顶2026.md",
+    "title": "知乎44：OpenAI烧了$100万/天做视频，然后关掉了——2026年AI视频生成的中国时刻",
+    "word_count": 1497,
+    "domains": [
+      "AI应用",
+      "硬件",
+      "内容创作"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎44_Sora关停_中国AI视频登顶2026.md"
+  },
+  {
+    "file": "知乎44_声子谱计算5个隐藏雷区_避坑系列11.md",
+    "title": "知乎44：声子谱计算的5个隐藏雷区——从\"算出来了\"到\"算对了\"（避坑系列#11）",
+    "word_count": 1670,
+    "domains": [
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎44_声子谱计算5个隐藏雷区_避坑系列11.md"
+  },
+  {
+    "file": "知乎45_斯坦福AI指数2026_12个真相.md",
+    "title": "知乎45：斯坦福400页AI报告出炉：中美差距仅2.7%，95%的企业AI投资打了水漂",
+    "word_count": 1518,
+    "domains": [
+      "AI产业",
+      "AI技术",
+      "AI政策",
+      "AI应用",
+      "硬件",
+      "能源"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎45_斯坦福AI指数2026_12个真相.md"
+  },
+  {
+    "file": "知乎46_中国AI政策2026_万亿资金怎么花.md",
+    "title": "知乎46：6000亿特别国债+600亿产业基金——2026年中国AI万亿资金在往哪砸？",
+    "word_count": 1732,
+    "domains": [
+      "AI产业",
+      "AI政策",
+      "AI应用",
+      "开源",
+      "硬件",
+      "能源",
+      "制造"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎46_中国AI政策2026_万亿资金怎么花.md"
+  },
+  {
+    "file": "知乎46_能带结构分析5个隐藏雷区_避坑系列13.md",
+    "title": "知乎46：能带结构分析的5个隐藏雷区——DOS没问题不代表能带没问题（避坑系列#13）",
+    "word_count": 2768,
+    "domains": [
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎46_能带结构分析5个隐藏雷区_避坑系列13.md"
+  },
+  {
+    "file": "知乎47_光学性质计算5个隐藏雷区_避坑14.md",
+    "title": "",
+    "word_count": 1940,
+    "domains": [
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎47_光学性质计算5个隐藏雷区_避坑14.md"
+  },
+  {
+    "file": "知乎4_AIRA_AI设计AI_计算化学.md",
+    "title": "",
+    "word_count": 1356,
+    "domains": [
+      "AI技术",
+      "AI应用"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎4_AIRA_AI设计AI_计算化学.md"
+  },
+  {
+    "file": "知乎5_DFT计算避坑检查单.md",
+    "title": "",
+    "word_count": 993,
+    "domains": [
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎5_DFT计算避坑检查单.md"
+  },
+  {
+    "file": "知乎6_审稿人计算不可信_回复框架.md",
+    "title": "",
+    "word_count": 1247,
+    "domains": [
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎6_审稿人计算不可信_回复框架.md"
+  },
+  {
+    "file": "知乎7_ML势函数现状与陷阱.md",
+    "title": "",
+    "word_count": 1229,
+    "domains": [
+      "其他"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎7_ML势函数现状与陷阱.md"
+  },
+  {
+    "file": "知乎8_AI效率工具推荐2026.md",
+    "title": "",
+    "word_count": 921,
+    "domains": [
+      "AI应用"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎8_AI效率工具推荐2026.md"
+  },
+  {
+    "file": "知乎9_神经元是错的_信息差套利.md",
+    "title": "",
+    "word_count": 1114,
+    "domains": [
+      "AI技术",
+      "学术"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎9_神经元是错的_信息差套利.md"
+  },
+  {
+    "file": "知乎启动方案_V1.md",
+    "title": "知乎学术内容启动方案 V1",
+    "word_count": 644,
+    "domains": [
+      "AI应用",
+      "学术",
+      "变现"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎启动方案_V1.md"
+  },
+  {
+    "file": "知乎首篇_DFT计算入门.md",
+    "title": "知乎回答草稿 — AI初稿，待宿主审核注入个人经验",
+    "word_count": 892,
+    "domains": [
+      "其他"
+    ],
+    "tags": [],
+    "path": "path_b_ai_content\\知乎首篇_DFT计算入门.md"
+  }
+]

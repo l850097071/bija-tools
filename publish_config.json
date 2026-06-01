@@ -1,0 +1,23 @@
+{
+  "platforms": {
+    "zhihu": {
+      "tool": "multi-publisher",
+      "configured": false,
+      "note": "需手动执行: npm install -g multi-publisher && mpub login -p zhihu"
+    },
+    "reddit": {
+      "client_id": "",
+      "client_secret": "",
+      "username": null,
+      "password": null,
+      "subreddit": "comp_chem",
+      "user_agent": "bija-publisher/1.0",
+      "configured": false,
+      "note": "需在 https://www.reddit.com/prefs/apps 创建App"
+    }
+  },
+  "default_author": "计算化学笔记",
+  "ai_disclaimer": true,
+  "publish_delay_seconds": 3,
+  "max_retries": 2
+}
