@@ -3,296 +3,416 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="bija-tools — Free open-source computational chemistry toolkit. VASP input generator, pre-submit gate validator, OUTCAR parser, literature search, and the largest DFT pitfalls knowledge base in Chinese.">
-<meta name="keywords" content="VASP, DFT, computational chemistry, INCAR generator, POSCAR, KPOINTS, OUTCAR parser, pitfalls, Bader charge, transition state, NEB">
-<title>bija-tools — Computational Chemistry Toolkit | Free & Open Source</title>
+<meta name="description" content="bija-tools: Free open-source VASP input generator, gate validator, and DFT pitfalls knowledge base. 59 elements, 10 validation gates, 33+ pitfall articles. pip install ready.">
+<meta name="keywords" content="VASP, DFT, computational chemistry, INCAR generator, Bader charge, pitfalls, transition state, NEB, DOS, band structure, phonon">
+<meta property="og:title" content="bija-tools — Computational Chemistry Toolkit">
+<meta property="og:description" content="Free VASP input generator + gate validator + 33 DFT pitfall articles">
+<meta property="og:url" content="https://l850097071.github.io/bija-tools/">
+<title>bija-tools — Free VASP Input Generator & DFT Pitfalls DB</title>
 <style>
 :root {
-  --bg: #0a0e14; --fg: #c9d1d9; --accent: #39bae6;
-  --border: #1c2333; --card: #111820; --green: #7fd962;
-  --orange: #ffb454; --red: #f26d78; --muted: #6c7380;
-  --gradient: linear-gradient(135deg, #39bae620, #7fd96220);
+  --bg: #0a0e14; --fg: #c9d1d9; --accent: #39bae6; --border: #1c2333;
+  --card: #111820; --green: #7fd962; --orange: #ffb454; --red: #f26d78;
+  --muted: #6c7380;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
   background: var(--bg); color: var(--fg); line-height: 1.7; }
-.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
 
 /* Hero */
-.hero { text-align: center; padding: 80px 0 60px; position: relative; overflow: hidden; }
-.hero::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-  background: radial-gradient(circle at 30% 50%, #39bae608 0%, transparent 60%),
-              radial-gradient(circle at 70% 50%, #7fd96208 0%, transparent 60%); z-index: 0; }
-.hero > * { position: relative; z-index: 1; }
-.hero h1 { font-size: 2.8em; background: linear-gradient(135deg, #39bae6, #7fd962); -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 16px; }
-.hero .subtitle { font-size: 1.2em; color: var(--muted); max-width: 600px; margin: 0 auto 30px; }
-.hero .install-box { display: inline-block; background: var(--card); border: 1px solid var(--border);
-  border-radius: 8px; padding: 14px 24px; font-family: 'Cascadia Code', 'Fira Code', monospace;
-  font-size: 0.95em; color: var(--green); cursor: pointer; transition: border-color 0.2s; }
-.hero .install-box:hover { border-color: var(--accent); }
-.hero .badges { margin-top: 20px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.hero .badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px;
-  background: var(--card); border: 1px solid var(--border); border-radius: 20px; font-size: 0.85em; }
+.hero { text-align: center; padding: 60px 0 40px; }
+.hero h1 { font-size: 2.5em; background: linear-gradient(135deg, #39bae6, #7fd962);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: var(--muted); font-size: 1.15em; max-width: 650px; margin: 12px auto 24px; }
+.install-cmd { display: inline-block; background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px 24px; font-family: monospace; font-size: 0.92em;
+  color: var(--green); cursor: pointer; user-select: all; }
+.hero-badges { margin-top: 16px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+.badge { padding: 5px 14px; background: var(--card); border: 1px solid var(--border);
+  border-radius: 20px; font-size: 0.82em; }
 
-/* Stats bar */
-.stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;
-  padding: 30px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin: 20px 0 50px; }
-.stat-item { text-align: center; }
-.stat-num { font-size: 2em; font-weight: 700; color: var(--accent); }
-.stat-label { color: var(--muted); font-size: 0.85em; margin-top: 4px; }
+/* Tabs */
+.tabs { display: flex; gap: 2px; margin: 30px 0 20px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.tab { padding: 10px 20px; background: none; border: none; color: var(--muted); cursor: pointer;
+  font-size: 0.93em; border-bottom: 2px solid transparent; transition: all 0.2s; }
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab:hover { color: var(--fg); }
+.panel { display: none; }
+.panel.active { display: block; }
 
-/* Sections */
-section { padding: 50px 0; }
-section h2 { font-size: 1.8em; margin-bottom: 12px; color: var(--fg); }
-section h2 .icon { margin-right: 8px; }
-section .lead { color: var(--muted); margin-bottom: 30px; font-size: 1.05em; }
+/* Cards */
+.card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 24px; margin-bottom: 20px; }
+.card h2 { color: var(--accent); margin-bottom: 12px; font-size: 1.25em; }
 
-/* Feature grid */
-.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-.feature-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px;
-  padding: 24px; transition: border-color 0.2s, transform 0.2s; }
-.feature-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-.feature-card .icon { font-size: 1.8em; margin-bottom: 10px; }
-.feature-card h3 { font-size: 1.1em; margin-bottom: 8px; }
-.feature-card p { color: var(--muted); font-size: 0.9em; }
-.feature-card code { background: #1c2333; padding: 2px 6px; border-radius: 4px;
-  font-size: 0.85em; color: var(--green); }
+/* Form */
+.form-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+.form-group { flex: 1; min-width: 150px; }
+.form-group label { display: block; color: var(--muted); font-size: 0.82em; margin-bottom: 4px; }
+.form-group input, .form-group select { width: 100%; padding: 9px 14px; background: var(--bg);
+  border: 1px solid var(--border); border-radius: 7px; color: var(--fg); font-size: 0.93em; }
+.form-group input:focus, .form-group select:focus { outline: none; border-color: var(--accent); }
 
-/* Code block */
-.code-block { background: var(--card); border: 1px solid var(--border); border-radius: 8px;
-  padding: 20px; font-family: 'Cascadia Code', 'Fira Code', monospace; font-size: 0.88em;
-  overflow-x: auto; margin: 16px 0; }
-.code-block .prompt { color: var(--green); }
-.code-block .cmd { color: var(--accent); }
-.code-block .comment { color: var(--muted); }
+/* Buttons */
+.btn { padding: 10px 22px; border: none; border-radius: 7px; cursor: pointer;
+  font-size: 0.93em; font-weight: 600; transition: all 0.2s; }
+.btn-primary { background: #238636; color: white; }
+.btn-primary:hover { background: #2ea043; }
+.btn-accent { background: var(--accent); color: #0a0e14; }
 
-/* Pitfalls table */
-.pitfalls-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
-.pitfalls-table th { text-align: left; padding: 10px 14px; border-bottom: 2px solid var(--border);
-  color: var(--muted); font-size: 0.85em; text-transform: uppercase; }
-.pitfalls-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); font-size: 0.9em; }
-.pitfalls-table tr:hover { background: #39bae608; }
-.pitfalls-table .cat { display: inline-block; padding: 2px 8px; border-radius: 10px;
-  font-size: 0.75em; font-weight: 600; }
+/* Output */
+.output { background: #0a0e14; border: 1px solid var(--border); border-radius: 7px;
+  padding: 18px; margin-top: 14px; max-height: 500px; overflow-y: auto;
+  font-family: 'Cascadia Code', 'Fira Code', monospace; font-size: 0.84em; white-space: pre-wrap; }
+.output:empty { display: none; }
+.file-dl { display: inline-block; margin: 6px 6px 0 0; padding: 6px 14px;
+  background: var(--card); border: 1px solid var(--border); border-radius: 7px;
+  color: var(--accent); text-decoration: none; font-size: 0.82em; cursor: pointer; }
+
+/* Pitfall DB */
+.search-box { width: 100%; padding: 10px 16px; background: var(--bg); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--fg); font-size: 0.95em; margin-bottom: 16px; }
+.search-box:focus { outline: none; border-color: var(--accent); }
+.pitfall-item { background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 14px; margin-bottom: 10px; }
+.pitfall-item h4 { color: var(--orange); margin-bottom: 4px; }
+.pitfall-item .trap { color: var(--red); font-size: 0.88em; }
+.pitfall-item .fix { color: var(--green); font-size: 0.88em; margin-top: 4px; }
+.pitfall-item .cat { display: inline-block; padding: 2px 8px; border-radius: 10px;
+  font-size: 0.72em; margin-left: 6px; }
 .cat-charge { background: #39bae620; color: var(--accent); }
 .cat-geom { background: #7fd96220; color: var(--green); }
 .cat-elec { background: #ffb45420; color: var(--orange); }
 .cat-vib { background: #f26d7820; color: var(--red); }
 
 /* CTA */
-.cta { text-align: center; padding: 50px 20px; background: var(--gradient);
+.cta { text-align: center; padding: 40px 24px; background: linear-gradient(135deg, #23863618, #39bae618);
   border: 1px solid var(--border); border-radius: 12px; margin: 40px 0; }
-.cta h2 { color: var(--fg); }
-.cta .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
-.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px;
-  border-radius: 8px; font-size: 1em; font-weight: 600; text-decoration: none; transition: all 0.2s; }
-.btn-primary { background: #39bae6; color: #0a0e14; }
-.btn-primary:hover { background: #269fc9; }
-.btn-secondary { background: var(--card); color: var(--fg); border: 1px solid var(--border); }
-.btn-secondary:hover { border-color: var(--accent); }
-.btn-green { background: #2d7335; color: white; }
-.btn-green:hover { background: #368a40; }
+.cta h2 { margin-bottom: 10px; }
+.cta .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 16px; }
+.btn-sponsor { padding: 12px 28px; background: #db61a2; color: white; border-radius: 8px;
+  text-decoration: none; font-weight: 600; font-size: 0.95em; }
+.btn-sponsor:hover { background: #e57ab8; }
+.btn-gh { padding: 12px 28px; background: var(--card); color: var(--fg); border: 1px solid var(--border);
+  border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95em; }
 
-/* Footer */
-footer { text-align: center; padding: 40px 0; color: var(--muted); font-size: 0.85em;
-  border-top: 1px solid var(--border); margin-top: 60px; }
-footer a { color: var(--accent); text-decoration: none; }
-footer a:hover { text-decoration: underline; }
+footer { text-align: center; padding: 30px; color: var(--muted); font-size: 0.82em;
+  border-top: 1px solid var(--border); margin-top: 50px; }
+footer a { color: var(--accent); }
 
-/* Responsive */
 @media (max-width: 640px) {
-  .hero h1 { font-size: 1.8em; }
-  .hero .subtitle { font-size: 1em; }
-  .stats { gap: 20px; }
-  .features { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 1.6em; }
+  .tabs { gap: 0; }
+  .tab { padding: 8px 14px; font-size: 0.82em; }
 }
 </style>
 </head>
 <body>
 <div class="container">
 
-<!-- 🚀 Hero -->
-<header class="hero">
-  <h1>&#x269B;&#xFE0F; bija-tools</h1>
-  <p class="subtitle">A free, open-source CLI toolkit that saves computational chemists 100+ hours per year. VASP input generation, pre-submit validation, OUTCAR parsing — all in one command.</p>
-  <div class="install-box" onclick="copyInstall()" title="Click to copy">
-    $ pip install git+https://github.com/l850097071/bija-tools.git
-  </div>
-  <div class="badges">
+<!-- Hero -->
+<div class="hero">
+  <h1>&#x269B; bija-tools</h1>
+  <p>Free open-source computational chemistry toolkit. VASP input generation, pre-submit validation, OUTCAR parsing — and the largest DFT pitfalls knowledge base on the internet.</p>
+  <div class="install-cmd" onclick="navigator.clipboard.writeText(this.textContent.trim())">$ pip install git+https://github.com/l850097071/bija-tools.git</div>
+  <div class="hero-badges">
     <span class="badge">&#x2B50; Star on GitHub</span>
-    <span class="badge">&#x1F4E6; MIT License</span>
-    <span class="badge">&#x1F4A1; 59 Elements</span>
-    <span class="badge">&#x1F6E1;&#xFE0F; 10 Gate Checks</span>
-    <span class="badge">&#x1F4DA; 29+ Pitfalls DB</span>
+    <span class="badge">&#x2699; 59 Elements</span>
+    <span class="badge">&#x1F6E1; 10 Gates</span>
+    <span class="badge">&#x1F4DA; 33+ Pitfalls</span>
+    <span class="badge">&#x1F310; Web UI</span>
   </div>
-</header>
-
-<!-- 📊 Stats -->
-<div class="stats">
-  <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">Commands</div></div>
-  <div class="stat-item"><div class="stat-num">59</div><div class="stat-label">Elements</div></div>
-  <div class="stat-item"><div class="stat-num">10</div><div class="stat-label">Gate Validations</div></div>
-  <div class="stat-item"><div class="stat-num">29+</div><div class="stat-label">Pitfall Articles</div></div>
-  <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">Software Supported</div></div>
 </div>
 
-<!-- 🔧 Features -->
-<section id="features">
-  <h2><span class="icon">&#x1F527;</span> What It Does</h2>
-  <p class="lead">Every feature is born from real DFT calculation pain. No bloat. Just what you actually need.</p>
-  <div class="features">
-    <div class="feature-card">
-      <div class="icon">&#x2699;&#xFE0F;</div>
-      <h3>VASP Input Generator</h3>
-      <p>Formula &#x2192; INCAR + POSCAR + KPOINTS + job script. Auto-detects magnetism, sets ISPIN/MAGMOM. Supports 59 elements.</p>
-      <p><code>bija-tools vaspgen --formula Co3O4 -o job</code></p>
+<!-- Tabs -->
+<div class="tabs">
+  <button class="tab active" onclick="showPanel('generator')">&#x2699; Input Generator</button>
+  <button class="tab" onclick="showPanel('pitfalls')">&#x1F4DA; Pitfall Database</button>
+  <button class="tab" onclick="showPanel('cli')">&#x1F4BB; CLI Reference</button>
+  <button class="tab" onclick="showPanel('about')">&#x1F4A1; About</button>
+</div>
+
+<!-- Generator Panel -->
+<div id="panel-generator" class="panel active">
+  <div class="card">
+    <h2>VASP Input File Generator</h2>
+    <p style="color:var(--muted);margin-bottom:16px">Enter a chemical formula, select calculation type, get INCAR + KPOINTS instantly. Runs entirely in your browser.</p>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Chemical Formula</label>
+        <input type="text" id="formula" placeholder="e.g. Co3O4, Fe2O3, Pt(111)" value="Co3O4">
+      </div>
+      <div class="form-group">
+        <label>Calculation Type</label>
+        <select id="calcType">
+          <option value="opt">Structure Optimization (ISIF=3)</option>
+          <option value="sp">Single Point</option>
+          <option value="neb">NEB Transition State</option>
+          <option value="freq">Vibrational Frequency (DFPT)</option>
+          <option value="bader">Bader Charge Analysis</option>
+          <option value="dos">Density of States</option>
+          <option value="optical">Optical Properties</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>ENCUT (eV, optional)</label>
+        <input type="number" id="encut" placeholder="Auto-calculated" value="">
+      </div>
     </div>
-    <div class="feature-card">
-      <div class="icon">&#x1F6E1;&#xFE0F;</div>
-      <h3>Pre-Submit Gate Validator</h3>
-      <p>10 automated checks before SLURM submission. POTCAR mismatch? KPOINTS too sparse? Missing vdW? Blocked <em>before</em> wasting GPU hours.</p>
-      <p><code>bija-tools sbatch run.job</code></p>
-    </div>
-    <div class="feature-card">
-      <div class="icon">&#x1F4CA;</div>
-      <h3>OUTCAR Parser &amp; Reporter</h3>
-      <p>Convergence status, energies, forces, timing &#x2192; human-readable report. Batch mode watches directories for completed jobs.</p>
-      <p><code>bija-tools outcarp OUTCAR</code></p>
-    </div>
-    <div class="feature-card">
-      <div class="icon">&#x1F50D;</div>
-      <h3>Literature Deep Search</h3>
-      <p>Semantic Scholar API &#x2192; structured review with thematic grouping. Stay on top of the literature without leaving the terminal.</p>
-      <p><code>bija-tools litsearch "CO2 reduction"</code></p>
-    </div>
-    <div class="feature-card">
-      <div class="icon">&#x1F310;</div>
-      <h3>Web UI (NEW)</h3>
-      <p>Flask-powered web interface: VASP input generator + gate validator + pitfalls knowledge base. Point, click, generate.</p>
-      <p><code>bija-tools web --port 8765</code></p>
-    </div>
-    <div class="feature-card">
-      <div class="icon">&#x1F4CB;</div>
-      <h3>8 Calculation Recipes</h3>
-      <p>Pre-configured INCAR templates for CO&#x2082; adsorption, NEB, phonon, Bader, DOS, optical, bulk, DFT+U. Each with pitfall checklist.</p>
-      <p><code>bija-tools pipeline "CO2 reduction" -o job</code></p>
-    </div>
+    <button class="btn btn-primary" onclick="generateInputs()">&#x26A1; Generate</button>
+    <div class="output" id="output"></div>
+    <div id="downloads" style="margin-top:8px"></div>
   </div>
-</section>
+</div>
 
-<!-- 📚 Pitfalls Knowledge Base -->
-<section id="pitfalls">
-  <h2><span class="icon">&#x1F4DA;</span> DFT避坑知识库 (Pitfall Avoidance Database)</h2>
-  <p class="lead">The largest Chinese-language DFT pitfalls knowledge base — 29 articles and growing. Each article: error symptom &#x2192; physical root cause &#x2192; operational fix &#x2192; reviewer perspective &#x2192; self-check checklist.</p>
+<!-- Pitfalls Panel -->
+<div id="panel-pitfalls" class="panel">
+  <div class="card">
+    <h2>&#x1F4DA; DFT Pitfall Avoidance Database</h2>
+    <p style="color:var(--muted);margin-bottom:16px">33 articles covering every major VASP calculation type. Each includes error symptom → physical root cause → fix → reviewer perspective → checklist.</p>
+    <input type="text" class="search-box" id="pitfallSearch" placeholder="Search pitfalls... (e.g. Bader, adsorption, NEB, frequency)" oninput="filterPitfalls()">
+    <div id="pitfallList"></div>
+  </div>
+</div>
 
-  <table class="pitfalls-table">
-    <tr><th>#</th><th>Topic</th><th>Key Trap</th><th>Category</th></tr>
-    <tr>
-      <td>29</td><td>Adsorption Energy Calculation</td><td>O&#x2082; reference state error, periodic image interaction, coverage effects</td>
-      <td><span class="cat cat-geom">Geom</span></td>
-    </tr>
-    <tr>
-      <td>28</td><td>Work Function &amp; Surface Dipole</td><td>LDIPOL/IDIPOL missing, vacuum convergence, slab asymmetry</td>
-      <td><span class="cat cat-elec">Elec</span></td>
-    </tr>
-    <tr>
-      <td>27</td><td>Vibrational Frequency (Advanced)</td><td>Egg-box effect, thermodynamic corrections, imaginary frequency chain</td>
-      <td><span class="cat cat-vib">Vib</span></td>
-    </tr>
-    <tr>
-      <td>26</td><td>DOS SMEAR Broadening</td><td>ISMEAR=-1 not universal, SIGMA convergence, false metallic character</td>
-      <td><span class="cat cat-elec">Elec</span></td>
-    </tr>
-    <tr>
-      <td>25</td><td>Band Structure K-Path</td><td>Auto-path misses high-symmetry points, path discontinuity artifacts</td>
-      <td><span class="cat cat-elec">Elec</span></td>
-    </tr>
-    <tr>
-      <td>24</td><td>Solvation Effects (VASPsol)</td><td>Dielectric constant choice, cavity parameters, non-electrostatic terms</td>
-      <td><span class="cat cat-geom">Geom</span></td>
-    </tr>
-    <tr>
-      <td>23</td><td>van der Waals Corrections</td><td>Method selection (DFT-D2/D3/TS/MBD), double-counting with XC functional</td>
-      <td><span class="cat cat-geom">Geom</span></td>
-    </tr>
-    <tr>
-      <td>21</td><td>DFT+U Calculation</td><td>U value projector-dependence, cross-code incomparability, JCTC 2026 orbital-resolved U</td>
-      <td><span class="cat cat-charge">Charge</span></td>
-    </tr>
-    <tr>
-      <td>18</td><td>COHP/ICOHP Bonding Analysis</td><td>Sign convention trap, charge spilling >5%, cross-bond-type incomparability</td>
-      <td><span class="cat cat-charge">Charge</span></td>
-    </tr>
-    <tr>
-      <td>17</td><td>ELF Topological Analysis</td><td>Threshold not universal (&#x2260;0.5), PAW core electron artifact, LOL cross-validation</td>
-      <td><span class="cat cat-charge">Charge</span></td>
-    </tr>
-  </table>
-  <p style="color:var(--muted);text-align:center;margin-top:16px">
-    &#x1F4CC; 29/50 complete (58%) — Full collection available in the <a href="https://github.com/l850097071/bija-monetization" style="color:var(--accent)">bija-monetization</a> repository.
-  </p>
-</section>
+<!-- CLI Panel -->
+<div id="panel-cli" class="panel">
+  <div class="card">
+    <h2>&#x1F4BB; CLI Quick Reference</h2>
+    <div class="output" style="max-height:600px">
+<span style="color:var(--muted)"># Install</span>
+$ <span style="color:var(--green)">pip install git+https://github.com/l850097071/bija-tools.git</span>
 
-<!-- 🎯 CTA -->
-<section class="cta">
+<span style="color:var(--muted)"># Generate VASP inputs</span>
+$ <span style="color:var(--accent)">bija-tools vaspgen --formula Co3O4 -o job</span>
+
+<span style="color:var(--muted)"># Validate before submission (10 gates)</span>
+$ <span style="color:var(--accent)">bija-tools sbatch job/run_vasp.job --dry-run</span>
+
+<span style="color:var(--muted)"># Parse OUTCAR</span>
+$ <span style="color:var(--accent)">bija-tools outcarp OUTCAR</span>
+
+<span style="color:var(--muted)"># Literature search</span>
+$ <span style="color:var(--accent)">bija-tools litsearch "CO2 photoreduction on metal oxides"</span>
+
+<span style="color:var(--muted)"># Full pipeline: research → generate → validate</span>
+$ <span style="color:var(--accent)">bija-tools pipeline "CO2 reduction" --formula TiO2 -o job</span>
+
+<span style="color:var(--muted)"># Launch web UI</span>
+$ <span style="color:var(--accent)">bija-tools web</span></div>
+  </div>
+</div>
+
+<!-- About Panel -->
+<div id="panel-about" class="panel">
+  <div class="card">
+    <h2>&#x1F4A1; About bija-tools</h2>
+    <p>Built by a computational chemist who spent 5 years fighting VASP inputs. <strong>bija-tools</strong> automates the repetitive parts of DFT calculations so you can focus on science.</p>
+    <br>
+    <p><strong>What's included:</strong></p>
+    <ul style="padding-left:20px;margin:8px 0">
+      <li><strong>vaspgen</strong> — Formula → INCAR+POSCAR+KPOINTS+jobs script. 59 elements, auto-detects magnetism</li>
+      <li><strong>gate</strong> — 10 pre-submit validations (POTCAR, KPOINTS, ENCUT, vdW, dipole...)</li>
+      <li><strong>outcarp</strong> — Parse OUTCAR into human-readable report</li>
+      <li><strong>litsearch</strong> — Semantic Scholar → structured literature review</li>
+      <li><strong>web</strong> — Flask web UI with all features + pitfalls knowledge base</li>
+      <li><strong>8 recipes</strong> — Pre-configured INCARs for CO2 ads, NEB, phonon, Bader, DOS, optical, bulk, DFT+U</li>
+    </ul>
+    <br>
+    <p><strong>Supports:</strong> VASP, PWmat, Gaussian | <strong>License:</strong> MIT — free forever</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta">
   <h2>&#x2615; Support This Project</h2>
-  <p style="color:var(--muted);max-width:500px;margin:12px auto">
-    bija-tools is free and open source forever. If it saves you time, consider supporting development.
-  </p>
-  <div class="btn-group">
-    <a href="https://github.com/l850097071/bija-tools" class="btn btn-primary" target="_blank">&#x2B50; Star on GitHub</a>
-    <a href="https://github.com/sponsors/l850097071" class="btn btn-green" target="_blank">&#x2764;&#xFE0F; Sponsor</a>
-    <a href="https://github.com/l850097071/bija-tools/issues" class="btn btn-secondary" target="_blank">&#x1F41B; Report Bug</a>
+  <p style="color:var(--muted)">bija-tools is free and open source. If it saves you time, consider supporting.</p>
+  <div class="btn-row">
+    <a href="https://github.com/l850097071/bija-tools" class="btn-gh" target="_blank">&#x2B50; Star on GitHub</a>
+    <a href="https://github.com/sponsors/l850097071" class="btn-sponsor" target="_blank">&#x2764; Sponsor</a>
   </div>
-  <p style="margin-top:20px;font-size:0.85em;color:var(--muted)">
-    Or share with a colleague who does DFT calculations &#x1F64C;
-  </p>
-</section>
-
-<!-- 📦 Quick Start -->
-<section id="quickstart">
-  <h2><span class="icon">&#x26A1;</span> Quick Start</h2>
-  <div class="code-block">
-<span class="comment"># Install</span>
-<span class="prompt">$</span> <span class="cmd">pip install git+https://github.com/l850097071/bija-tools.git</span>
-
-<span class="comment"># Generate VASP inputs for Co&#x2083;O&#x2084;</span>
-<span class="prompt">$</span> <span class="cmd">bija-tools vaspgen --formula Co3O4 -o my_calc</span>
-
-<span class="comment"># Validate before submission</span>
-<span class="prompt">$</span> <span class="cmd">bija-tools sbatch my_calc/run_vasp.job --dry-run</span>
-
-<span class="comment"># Parse results</span>
-<span class="prompt">$</span> <span class="cmd">bija-tools outcarp my_calc/OUTCAR</span>
-
-<span class="comment"># Full pipeline: literature &#x2192; inputs &#x2192; validate</span>
-<span class="prompt">$</span> <span class="cmd">bija-tools pipeline "CO2 photoreduction" --formula TiO2 -o job</span>
-
-<span class="comment"># Launch web UI</span>
-<span class="prompt">$</span> <span class="cmd">bija-tools web</span>
-  </div>
-</section>
+</div>
 
 <footer>
-  <p>bija-tools v0.1.0 &#xB7; <a href="https://github.com/l850097071/bija-tools" target="_blank">GitHub</a> &#xB7; MIT License</p>
-  <p>Made with &#x2764;&#xFE0F; for the computational chemistry community &#xB7; No personal data collected &#xB7; No ads &#xB7; No tracking</p>
+  <p>bija-tools v0.1.0 · <a href="https://github.com/l850097071/bija-tools" target="_blank">GitHub</a> · MIT License · No tracking · No ads · No personal data</p>
 </footer>
-
 </div>
 
 <script>
-function copyInstall() {
-  const cmd = 'pip install git+https://github.com/l850097071/bija-tools.git';
-  navigator.clipboard.writeText(cmd).then(() => {
-    const box = document.querySelector('.install-box');
-    const orig = box.textContent;
-    box.textContent = ' Copied! ✓';
-    box.style.color = '#7fd962';
-    setTimeout(() => { box.textContent = orig; box.style.color = '#7fd962'; }, 2000);
-  });
+// ── Element Database ──
+const ELEMENTS = {
+  H:{enmax:250,pot:"H",mass:1.008},He:{enmax:280,pot:"He",mass:4.003},
+  Li:{enmax:300,pot:"Li_sv",mass:6.941,metal:true},Be:{enmax:320,pot:"Be_sv",mass:9.012,metal:true},
+  B:{enmax:319,pot:"B",mass:10.811},C:{enmax:400,pot:"C",mass:12.011},
+  N:{enmax:400,pot:"N",mass:14.007},O:{enmax:400,pot:"O",mass:15.999},
+  F:{enmax:400,pot:"F",mass:18.998},Ne:{enmax:350,pot:"Ne",mass:20.18},
+  Na:{enmax:280,pot:"Na_sv",mass:22.99,metal:true},Mg:{enmax:300,pot:"Mg_sv",mass:24.305,metal:true},
+  Al:{enmax:240,pot:"Al",mass:26.982,metal:true},Si:{enmax:245,pot:"Si",mass:28.086},
+  P:{enmax:255,pot:"P",mass:30.974},S:{enmax:259,pot:"S",mass:32.065},
+  Cl:{enmax:262,pot:"Cl",mass:35.453},K:{enmax:270,pot:"K_sv",mass:39.098,metal:true},
+  Ca:{enmax:280,pot:"Ca_sv",mass:40.078,metal:true},Sc:{enmax:290,pot:"Sc_sv",mass:44.956,metal:true},
+  Ti:{enmax:300,pot:"Ti_sv",mass:47.867,metal:true},V:{enmax:310,pot:"V_sv",mass:50.942,metal:true},
+  Cr:{enmax:320,pot:"Cr_pv",mass:51.996,metal:true,mag:true},Mn:{enmax:330,pot:"Mn_pv",mass:54.938,metal:true,mag:true},
+  Fe:{enmax:340,pot:"Fe_pv",mass:55.845,metal:true,mag:true},Co:{enmax:350,pot:"Co",mass:58.933,metal:true,mag:true},
+  Ni:{enmax:360,pot:"Ni_pv",mass:58.693,metal:true,mag:true},Cu:{enmax:370,pot:"Cu_pv",mass:63.546,metal:true},
+  Zn:{enmax:280,pot:"Zn",mass:65.38,metal:true},Ga:{enmax:290,pot:"Ga_d",mass:69.723},
+  Ge:{enmax:300,pot:"Ge_d",mass:72.64},As:{enmax:310,pot:"As",mass:74.922},
+  Se:{enmax:320,pot:"Se",mass:78.96},Br:{enmax:330,pot:"Br",mass:79.904},
+  Rb:{enmax:240,pot:"Rb_sv",mass:85.468,metal:true},Sr:{enmax:250,pot:"Sr_sv",mass:87.62,metal:true},
+  Y:{enmax:260,pot:"Y_sv",mass:88.906,metal:true},Zr:{enmax:270,pot:"Zr_sv",mass:91.224,metal:true},
+  Nb:{enmax:280,pot:"Nb_pv",mass:92.906,metal:true},Mo:{enmax:290,pot:"Mo_pv",mass:95.94,metal:true},
+  Ru:{enmax:300,pot:"Ru_pv",mass:101.07,metal:true},Rh:{enmax:310,pot:"Rh_pv",mass:102.91,metal:true},
+  Pd:{enmax:320,pot:"Pd",mass:106.42,metal:true},Ag:{enmax:330,pot:"Ag",mass:107.87,metal:true},
+  Pt:{enmax:340,pot:"Pt",mass:195.08,metal:true},Au:{enmax:350,pot:"Au",mass:196.97,metal:true}
+};
+
+// ── Calc type configs ──
+const CALCS = {
+  opt:{name:'Structure Optimization',ibrion:2,isif:3,nsw:100,ediff:'1E-5',ediffg:'-0.02',encutF:1.3,
+       desc:'ISIF=3 (cell+ions), EDIFFG=-0.02 eV/A'},
+  sp:{name:'Single Point',ibrion:-1,nsw:0,ediff:'1E-6',encutF:1.3,desc:'Static SCF, no relaxation'},
+  neb:{name:'NEB',ibrion:3,nsw:200,ediff:'1E-5',ediffg:'-0.05',encutF:1.3,potim:0.1,images:5,
+       desc:'Climbing image NEB, POTIM=0.1, 5 images'},
+  freq:{name:'Frequency (DFPT)',ibrion:5,nfree:2,ediff:'1E-8',encutF:1.5,p prec:'Accurate',potim:0.015,
+        desc:'DFPT, EDIFF=1E-8, POTIM=0.015'},
+  bader:{name:'Bader Charge',ibrion:-1,nsw:0,ediff:'1E-6',encutF:1.3,prec:'Accurate',lacharg:'.TRUE.',
+         desc:'LAECHG=.TRUE., dense FFT grid required'},
+  dos:{name:'DOS',ibrion:-1,nsw:0,ediff:'1E-6',encutF:1.3,lorbit:11,sigma:0.05,
+       desc:'LORBIT=11, SIGMA=0.05'},
+  optical:{name:'Optical',ibrion:-1,nsw:0,ediff:'1E-6',encutF:1.5,prec:'Accurate',loptics:'.TRUE.',
+           desc:'LOPTICS=.TRUE., ENCUT=1.5x default'}
+};
+
+function parseFormula(s) {
+  const elts = [];
+  const re = /([A-Z][a-z]?)(\d*\.?\d*)/g;
+  let m;
+  while ((m = re.exec(s)) !== null) elts.push([m[1], parseFloat(m[2])||1]);
+  return elts;
 }
+
+function generateInputs() {
+  const formula = document.getElementById('formula').value.trim();
+  const calcType = document.getElementById('calcType').value;
+  const encutCustom = document.getElementById('encut').value;
+
+  if (!formula) { alert('Enter a chemical formula'); return; }
+
+  const elts = parseFormula(formula);
+  const cfg = CALCS[calcType];
+  const hasMetal = elts.some(([e]) => ELEMENTS[e]?.metal);
+  const hasMag = elts.some(([e]) => ELEMENTS[e]?.mag);
+  const maxENMAX = Math.max(...elts.map(([e]) => ELEMENTS[e]?.enmax || 400));
+  const encut = encutCustom ? parseInt(encutCustom) : Math.round(maxENMAX * cfg.encutF);
+  const ismear = hasMetal ? 1 : 0;
+  const sigma = hasMetal ? 0.2 : (cfg.sigma || 0.05);
+  const ispin = hasMag ? 2 : 1;
+  const now = new Date().toISOString().slice(0,19);
+
+  // Build INCAR
+  let incar = `# INCAR — bija-tools web generator\n# ${cfg.name}: ${cfg.desc}\n# Generated: ${now}\n\n`;
+  incar += `SYSTEM = ${formula}\nENCUT = ${encut}\nEDIFF = ${cfg.ediff}\n`;
+  incar += `PREC = ${cfg.prec||'Normal'}\nISMEAR = ${ismear}\nSIGMA = ${sigma}\n`;
+  incar += `IBRION = ${cfg.ibrion}\nNSW = ${cfg.nsw||0}\n`;
+
+  if (cfg.isif !== undefined) incar += `ISIF = ${cfg.isif}\n`;
+  if (cfg.ediffg) incar += `EDIFFG = ${cfg.ediffg}\n`;
+  if (cfg.potim) incar += `POTIM = ${cfg.potim}\n`;
+  if (cfg.lorbit) incar += `LORBIT = ${cfg.lorbit}\n`;
+  if (cfg.lacharg) incar += `LAECHG = ${cfg.lacharg}\n`;
+  if (cfg.loptics) incar += `LOPTICS = ${cfg.loptics}\n`;
+  if (cfg.nfree) incar += `NFREE = ${cfg.nfree}\n`;
+  if (cfg.images) incar += `IMAGES = ${cfg.images}\n`;
+
+  incar += `ISYM = 0\nLREAL = Auto\nALGO = Fast\nGGA_COMPAT = FALSE\nLASPH = .TRUE.\n`;
+  incar += `IVDW = 11  # DFT-D3 Becke-Johnson\n`;
+
+  if (ispin === 2) {
+    incar += `ISPIN = 2\n`;
+    const mags = elts.map(([e]) => ELEMENTS[e]?.mag ? '5.0' : '0.6').join(' ');
+    incar += `MAGMOM = ${mags}\n`;
+  }
+
+  // Build KPOINTS
+  const kdens = ['dos','optical','bader'].includes(calcType) ? '8 8 8' : '4 4 4';
+  const kpoints = `# KPOINTS — bija-tools web\n0\nGamma\n${kdens}\n0 0 0\n`;
+
+  // POTCAR
+  const uniqueElts = [...new Set(elts.map(([e]) => e))];
+  const potcarCmd = `cat ${uniqueElts.map(e => ELEMENTS[e]?.pot || e).join(' ')} > POTCAR`;
+
+  // Output
+  const out = `\n${'='.repeat(55)}\nbija-tools VASP Input Generator\nFormula: ${formula} | ${cfg.name}\nRecommended ENCUT: ${encut} eV\n${'='.repeat(55)}\n\n${incar}\n\n${kpoints}\n# POTCAR build:\n# ${potcarCmd}\n\n# NOTE: POSCAR requires atomic coordinates from CIF/experiment.\n# Use: bija-tools vaspgen --cif your_structure.cif`;
+
+  document.getElementById('output').textContent = out;
+
+  // Download links
+  const files = {
+    'INCAR': incar,
+    'KPOINTS': kpoints,
+    'POTCAR_BUILD.sh': `#!/bin/bash\n${potcarCmd}\necho "POTCAR built"`,
+  };
+  let links = '';
+  for (const [name, content] of Object.entries(files)) {
+    const blob = new Blob([content], {type:'text/plain'});
+    const url = URL.createObjectURL(blob);
+    links += `<a class="file-dl" href="${url}" download="${name}">Download ${name}</a> `;
+  }
+  document.getElementById('downloads').innerHTML = links;
+}
+
+// ── Pitfall Database ──
+const PITFALLS = [
+  {id:33,n:'VASP计算的暗数据',cat:'Method',trap:'你算了但没报告的参数和决策→审稿人无法判断可复现性',fix:'在SI中放完整INCAR+收敛测试+磁构型搜索+位点搜索表+赝势列表+应力张量'},
+  {id:32,n:'审稿人最爱挑的5个角度',cat:'Writing',trap:'精度/方法/结构/分析/结论→5个角度每个都能导致拒稿',fix:'投稿前堵死:收敛证明+泛函三段论+位点搜索表+三证据原则+limitation段'},
+  {id:31,n:'VASP已知软件bug(7个)',cat:'Code',trap:'6.5.0 ISPIN+NCL crash/EOS FFT/DFPT对称性/LDAUTYPE默认/WAVECAR跨节点/并行I/O hang/能量漂移',fix:'升级6.5.1+固定FFT+ISYM=0+显式LDAUTYPE+ICHARG=2+保守MIX'},
+  {id:30,n:'Bader电荷:6方法3种相反方向',cat:'Charge',trap:'FFT网格/空盆地/共价高估/泛函依赖/参考态不一致/6方法分歧',fix:'网格2x收敛+LAECHG+DDEC6交叉验证+参考态同胞+趋势非绝对值'},
+  {id:29,n:'吸附能计算10大陷阱',cat:'Geom',trap:'O2参考态误差/周期镜像/参数一致性/弛豫不充分/位点不全/覆盖度/vdW/溶剂化/ZPE/k点',fix:'O2验证+15A真空+同参数参考态+完整位点搜索+vdW-D3'},
+  {id:28,n:'功函数与表面偶极矩',cat:'Elec',trap:'LDIPOL缺失/真空层不够/slab不对称/偶极修正误用/功函数提取不一致',fix:'LDIPOL+IDIPOL+真空层收敛(0.02eV)+对称slab+脚本化提取'},
+  {id:27,n:'振动频率高阶陷阱',cat:'Vib',trap:'Egg-box效应/热力学校正/虚频归因链/DFPT vs 有限位移/声学模不零',fix:'ENCUT1.5x+EDIFF1E-8+ISYM=0+Phonopy交叉验证+检查r点声学模<1cm-1'},
+  {id:26,n:'DOS SMEAR展宽陷阱',cat:'Elec',trap:'过大SMEAR→假金属性/过小→假gap/ISMEAR=-1不通用/单位陷阱',fix:'ISMEAR=0(绝缘体)或1(金属)+SIGMA收敛测试(0.01→0.20)+跨代码单位校验'},
+  {id:25,n:'能带K点路径陷阱',cat:'Elec',trap:'自动K路径遗漏高对称点/路径不连续→虚假gap/K点密度不足',fix:'Bilbao服务器验证KPATH+每条线段>=20k点+路径经过所有高对称点'},
+  {id:23,n:'范德华修正陷阱',cat:'Geom',trap:'方法选择(DFT-D2/D3/TS/MBD)/与泛函双重计数/金属表面筛选效应',fix:'IVDW=11(Grimme D3/BJ)+检查C6参数+金属体系考虑TS或MBD'},
+  {id:21,n:'DFT+U计算10个陷阱',cat:'Charge',trap:'U值projector依赖性/跨代码不可迁移/JCTC2026 orbital-resolved/VASP EOS bug',fix:'同类型projector+同代码+orbital-resolved U+显式LDAUTYPE+跨泛函验证'},
+  {id:20,n:'AIMD计算10个陷阱',cat:'Geom',trap:'步长>0.5fs含H/单条轨迹=鬼故事/NVT污染动力学量/统计欠采样/ML势函数',fix:'步长<=0.5fs+多轨迹+热能平衡检查+NVE做动力学量+验证ML势'},
+  {id:18,n:'COHP/ICOHP陷阱',cat:'Charge',trap:'符号三重陷阱/ICOHP跨键型不可比/charge spilling>5%/积分区间/费米校准',fix:'同类键才可比+spilling<5%+自旋分离+费米校准+Lobster质量验证'},
+  {id:17,n:'ELF分析陷阱',cat:'Charge',trap:'阈值0.5不通用/共价性误判/FFT精度/PAW伪影/过渡金属需LOL交叉验证',fix:'多阈值+过渡金属LOL验证+FFT 2x+半芯态赝势+5步框架'},
+  {id:15,n:'振动频率6个隐藏雷区',cat:'Vib',trap:'热力学校正/虚频/位移大小/egg-box/POTIM收敛/DFPT vs 有限位移',fix:'0.015A位移+EDIFF 1E-8+虚频检查结构+DFPT+有限位移交叉验证'},
+  {id:14,n:'光学性质5个雷区',cat:'Elec',trap:'PBE带隙低估/光谱红移/RPA忽略激子/GW起始点层次/各向异性',fix:'杂化泛函+RPA/GW+BSE+N bands=2x valence+非立方体系各向异性分量'},
+];
+
+function renderPitfalls(filter='') {
+  const q = filter.toLowerCase();
+  const filtered = PITFALLS.filter(p => !q || p.n.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q) || p.trap.toLowerCase().includes(q));
+  let html = `<p style="color:var(--muted)">${filtered.length} of ${PITFALLS.length} pitfalls shown</p>`;
+  for (const p of filtered) {
+    const catCls = {'Charge':'cat-charge','Geom':'cat-geom','Elec':'cat-elec','Vib':'cat-vib','Method':'cat-geom','Code':'cat-elec','Writing':'cat-charge'}[p.cat]||'';
+    html += `<div class="pitfall-item">
+      <h4>#${p.id} ${p.n} <span class="cat ${catCls}">${p.cat}</span></h4>
+      <div class="trap">Warning: ${p.trap}</div>
+      <div class="fix">Fix: ${p.fix}</div>
+    </div>`;
+  }
+  document.getElementById('pitfallList').innerHTML = html;
+}
+
+function filterPitfalls() {
+  renderPitfalls(document.getElementById('pitfallSearch').value);
+}
+
+// ── UI ──
+function showPanel(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.tab[onclick="showPanel('${name}')"]`).classList.add('active');
+  document.getElementById(`panel-${name}`).classList.add('active');
+  if (name === 'pitfalls') renderPitfalls();
+}
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+  renderPitfalls();
+});
 </script>
 </body>
 </html>
